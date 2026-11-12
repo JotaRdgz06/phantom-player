@@ -6,9 +6,20 @@
     </head>
     <body>
         <h1>Hola mundo</h1>
-        <input type="file" accept="audio/mpeg" multiple>
+        <input type="file" id="cancion" accept="audio/mpeg" multiple>
     <br>
-        <audio controls>
+        <audio id="audio" controls>
         </audio>
+
+        <script>
+            const contenido = document.querySelector("#cancion");
+
+            contenido.addEventListener("change", function(){
+                for (let i=0; i<contenido.files.length;i++){
+                    console.log(contenido.files[i].name);
+                }
+            })
+        </script>
+
     </body>
 </html>
