@@ -13,11 +13,15 @@
 
         <script>
             const contenido = document.querySelector("#cancion");
-
             contenido.addEventListener("change", function(){
                 for (let i=0; i<contenido.files.length;i++){
                     console.log(contenido.files[i].name);
                 }
+                const actual = URL.createObjectURL(contenido.files[0]);
+                console.log(actual);
+
+                const cancionActual = document.querySelector("#audio");
+                cancionActual.src = actual;
             })
         </script>
 
