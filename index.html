@@ -12,18 +12,29 @@
         </audio>
 
         <script>
+            let contador = 0;
             const contenido = document.querySelector("#cancion");
             contenido.addEventListener("change", function(){
                 for (let i=0; i<contenido.files.length;i++){
                     console.log(contenido.files[i].name);
                 }
                 if (contenido.files.length > 0){
-                    const actual = URL.createObjectURL(contenido.files[0]);
+                    cancionActual();
+                }
+            })
+            const audioActual = document.querySelector("#audio")
+            audio.addEventListener("ended", function(){
+                contador+=1;
+                console.log(" contador actualizado: " + contador);
+                cancionActual();
+            })
+            function cancionActual(){
+                const actual = URL.createObjectURL(contenido.files[contador]);
                     console.log(actual);
                     const cancionActual = document.querySelector("#audio");
                     cancionActual.src = actual;
-                }
-            })
+                    console.log("now playing: " + contenido.files[contador].name + "contador: " + contador)
+            }
         </script>
 
     </body>
