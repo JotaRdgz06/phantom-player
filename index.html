@@ -23,17 +23,23 @@
                 }
             })
             const audioActual = document.querySelector("#audio")
-            audio.addEventListener("ended", function(){
+            audioActual.addEventListener("ended", function(){
                 contador+=1;
+                bucle();
                 console.log(" contador actualizado: " + contador);
                 cancionActual();
             })
             function cancionActual(){
                 const actual = URL.createObjectURL(contenido.files[contador]);
                     console.log(actual);
-                    const cancionActual = document.querySelector("#audio");
-                    cancionActual.src = actual;
+                    audioActual.src = actual;
+                    audioActual.play();
                     console.log("now playing: " + contenido.files[contador].name + "contador: " + contador)
+            }
+            function bucle(){
+                if (contador >= contenido.files.length){
+                    contador = 0;
+                }
             }
         </script>
 
