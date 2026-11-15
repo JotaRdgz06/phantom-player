@@ -36,7 +36,9 @@
                 const actual = URL.createObjectURL(playlist[contador]);
                     console.log(actual);
                     audioActual.src = actual;
-                    audioActual.play();
+                    audioActual.play().catch(function (error) {
+                        console.log("play falló: " + error.name);
+                    });
                     console.log("now playing: " + playlist[contador].name + " contador: " + contador)
                     console.log("\n")
             }
