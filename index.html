@@ -40,8 +40,6 @@
                 bucle();
                 console.log("contador actualizado: " + contador);
                 cancionActual();
-                reproduciendoCancion.textContent = playlist[contador].name;
-                actual.appendChild(reproduciendoCancion);
             })
             function cancionActual(){
                 const actual = URL.createObjectURL(playlist[contador]);
@@ -52,13 +50,17 @@
                     });
                     console.log("now playing: " + playlist[contador].name + " contador: " + contador)
                     console.log("\n")
+                    mostrarCancionActual();
             }
             function bucle(){
                 if (contador >= playlist.length){
                     contador = 0;
                 }
             }
+            function mostrarCancionActual(){
+                reproduciendoCancion.textContent = playlist[contador].name;
+                actual.appendChild(reproduciendoCancion);
+            }
         </script>
-
     </body>
 </html>
