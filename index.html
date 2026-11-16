@@ -11,13 +11,16 @@
         <audio id="audio" controls>
         </audio>
 
-        <ol id="cancionesAñadidas"></ol>
+        <p id="reproduciendoAhora">Reproduciendo ahora: </p>
+        <ol id="cancionesAgregadas">Canciones agregadas: </ol>
 
         <script>
             let contador = 0;
             const playlist = [];
-            const lista = document.querySelector("#cancionesAñadidas")
+            const lista = document.querySelector("#cancionesAgregadas")
             const contenido = document.querySelector("#cancion");
+            const actual = document.querySelector("#reproduciendoAhora")
+            const reproduciendoCancion = document.createElement("li");
             contenido.addEventListener("change", function(){
                 const playListVacia = playlist.length === 0;
                 for (let i=0; i<contenido.files.length;i++){
@@ -37,6 +40,8 @@
                 bucle();
                 console.log("contador actualizado: " + contador);
                 cancionActual();
+                reproduciendoCancion.textContent = playlist[contador].name;
+                actual.appendChild(reproduciendoCancion);
             })
             function cancionActual(){
                 const actual = URL.createObjectURL(playlist[contador]);
