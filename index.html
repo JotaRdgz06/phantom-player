@@ -11,15 +11,21 @@
         <audio id="audio" controls>
         </audio>
 
+        <ol id="cancionesAñadidas"></ol>
+
         <script>
             let contador = 0;
             const playlist = [];
+            const lista = document.querySelector("#cancionesAñadidas")
             const contenido = document.querySelector("#cancion");
             contenido.addEventListener("change", function(){
                 const playListVacia = playlist.length === 0;
                 for (let i=0; i<contenido.files.length;i++){
+                    const cancionNueva = document.createElement("li");
                     console.log(contenido.files[i].name);
                     playlist.push(contenido.files[i]);
+                    cancionNueva.textContent = contenido.files[i].name;
+                    lista.appendChild(cancionNueva);
                 }
                 if (playListVacia){
                     cancionActual();
