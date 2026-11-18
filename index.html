@@ -42,9 +42,9 @@
                 cancionActual();
             })
             function cancionActual(){
-                const actual = URL.createObjectURL(playlist[contador]);
-                    console.log(actual);
-                    audioActual.src = actual;
+                const actualSong = URL.createObjectURL(playlist[contador]);
+                    console.log(actualSong);
+                    audioActual.src = actualSong;
                     audioActual.play().catch(function (error) {
                         console.log("play falló: " + error.name);
                     });
