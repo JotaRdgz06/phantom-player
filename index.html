@@ -5,7 +5,7 @@
         <title>Phantom player</title>
     </head>
     <body>
-        <h1>Hola mundo</h1>
+        <h1>Phantom player</h1>
         <input type="file" id="cancion" accept="audio/mpeg" multiple>
     <br>
         <audio id="audio" controls>
@@ -22,7 +22,7 @@
             const playlist = [];
             const lista = document.querySelector("#cancionesAgregadas")
             const contenido = document.querySelector("#cancion");
-            const reproduciendo = document.querySelector("#reproduciendoAhora")
+            let urlActual = null;
             contenido.addEventListener("change", function(){
                 const playListVacia = playlist.length === 0;
                 for (let i=0; i<contenido.files.length;i++){
@@ -44,9 +44,12 @@
                 cancionActual();
             })
             function cancionActual(){
-                const actual = URL.createObjectURL(playlist[contador]);
-                    console.log(actual);
-                    audioActual.src = actual;
+                    if (urlActual !== null){
+                        URL.revokeObjectURL(urlActual)
+                    }
+                    urlActual = URL.createObjectURL(playlist[contador]);
+                    audioActual.src = urlActual;
+                    console.log(urlActual);
                     audioActual.play().catch(function (error) {
                         console.log("play falló: " + error.name);
                     });
