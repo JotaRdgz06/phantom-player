@@ -11,21 +11,23 @@
         <audio id="audio" controls>
         </audio>
 
-        <p id="reproduciendoAhora">Reproduciendo ahora: </p>
-        <ol id="cancionesAgregadas">Canciones agregadas: </ol>
+        <p>Reproduciendo ahora: <span id="reproduciendoAhora"></span></p>
+        <section>
+            <h3>Canciones agregadas: </h3>
+            <ol id="cancionesAgregadas"></ol>
+        </section>
 
         <script>
             let contador = 0;
             const playlist = [];
             const lista = document.querySelector("#cancionesAgregadas")
             const contenido = document.querySelector("#cancion");
-            const actual = document.querySelector("#reproduciendoAhora")
-            const reproduciendoCancion = document.createElement("li");
+            const reproduciendo = document.querySelector("#reproduciendoAhora")
             contenido.addEventListener("change", function(){
                 const playListVacia = playlist.length === 0;
                 for (let i=0; i<contenido.files.length;i++){
                     const cancionNueva = document.createElement("li");
-                    console.log(contenido.files[i].name);
+                    console.log("Añadido: " + contenido.files[i].name);
                     playlist.push(contenido.files[i]);
                     cancionNueva.textContent = contenido.files[i].name;
                     lista.appendChild(cancionNueva);
@@ -42,9 +44,9 @@
                 cancionActual();
             })
             function cancionActual(){
-                const actualSong = URL.createObjectURL(playlist[contador]);
-                    console.log(actualSong);
-                    audioActual.src = actualSong;
+                const actual = URL.createObjectURL(playlist[contador]);
+                    console.log(actual);
+                    audioActual.src = actual;
                     audioActual.play().catch(function (error) {
                         console.log("play falló: " + error.name);
                     });
@@ -58,8 +60,7 @@
                 }
             }
             function mostrarCancionActual(){
-                reproduciendoCancion.textContent = playlist[contador].name;
-                actual.appendChild(reproduciendoCancion);
+                document.querySelector("#reproduciendoAhora").textContent = playlist[contador].name;
             }
         </script>
     </body>
