@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+        <!--<link rel="icon" href="logo.png"> -->
         <meta charset="UTF-8">
         <title>Phantom player</title>
+        <style>
+            .seleccionada{
+                background-color: red;
+            }
+        </style>
     </head>
     <body>
         <h1>Phantom player</h1>
@@ -13,16 +19,17 @@
 
         <p>Reproduciendo ahora: <span id="reproduciendoAhora"></span></p>
         <section>
-            <h3>Canciones agregadas: </h3>
+            <h2>Canciones agregadas: </h2>
             <ol id="cancionesAgregadas"></ol>
         </section>
 
         <script>
             let contador = 0;
             const playlist = [];
-            const lista = document.querySelector("#cancionesAgregadas")
+            const lista = document.querySelector("#cancionesAgregadas");
             const contenido = document.querySelector("#cancion");
             let urlActual = null;
+
             contenido.addEventListener("change", function(){
                 const playListVacia = playlist.length === 0;
                 for (let i=0; i<contenido.files.length;i++){
@@ -36,7 +43,7 @@
                     cancionActual();
                 }
             })
-            const audioActual = document.querySelector("#audio")
+            const audioActual = document.querySelector("#audio");
             audioActual.addEventListener("ended", function(){
                 contador+=1;
                 bucle();
@@ -44,18 +51,23 @@
                 cancionActual();
             })
             function cancionActual(){
-                    if (urlActual !== null){
-                        URL.revokeObjectURL(urlActual)
-                    }
-                    urlActual = URL.createObjectURL(playlist[contador]);
-                    audioActual.src = urlActual;
-                    console.log(urlActual);
-                    audioActual.play().catch(function (error) {
-                        console.log("play falló: " + error.name);
-                    });
-                    console.log("now playing: " + playlist[contador].name + " contador: " + contador)
-                    console.log("\n")
-                    mostrarCancionActual();
+                if (urlActual !== null){
+                    URL.revokeObjectURL(urlActual);
+                }
+                urlActual = URL.createObjectURL(playlist[contador]);
+                audioActual.src = urlActual;
+                console.log(urlActual);
+                const marcada = lista.querySelector(".seleccionada")
+                if (marcada !== null){
+                    marcada.classList.remove("seleccionada");
+                }
+                lista.children[contador].classList.add("seleccionada");
+                audioActual.play().catch(function (error) {
+                    console.log("play falló: " + error.name);
+                });
+                console.log("now playing: " + playlist[contador].name + " contador: " + contador)
+                console.log("\n")
+                mostrarCancionActual();
             }
             function bucle(){
                 if (contador >= playlist.length){
