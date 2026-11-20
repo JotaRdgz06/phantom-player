@@ -90,6 +90,23 @@
                     cancionActual();
                 }
             }
+            botonAnterior.addEventListener("click", function(){
+                retrocederCancion();
+            })
+            function retrocederCancion(){
+                if (playlist.length > 0){
+                    if (audioActual.currentTime > 5){
+                        audioActual.currentTime = 0;
+                    } else {
+                        if (contador === 0){
+                            contador = playlist.length;
+                        }
+                        contador-=1;
+                        console.log("contador actualizado: " + contador);
+                        cancionActual();
+                    }
+                }
+            }
         </script>
     </body>
 </html>
